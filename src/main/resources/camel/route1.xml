@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Configures the Camel Context-->
+<routes xmlns="http://camel.apache.org/schema/spring">
+
+<route id="homePage">
+    <from uri="direct:home-page" />
+    <process ref="homePageProcessor" />
+
+</route>
+
+    <route id="processFile">
+        <from uri="direct:processFile" />
+        <convertBodyTo type="java.lang.String" />
+        <process ref="fileProcessor" />
+
+    </route>
+
+    <route id="uploadFile">
+        <from uri="jetty://http://0.0.0.0:9886/test" />
+        <process ref="fileProcessor" />
+    </route>
+
+</routes>
+

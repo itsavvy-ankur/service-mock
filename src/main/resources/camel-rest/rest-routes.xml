@@ -1,0 +1,16 @@
+<rests xmlns="http://camel.apache.org/schema/spring">
+
+    <rest>
+
+        <get uri="/home" id="homeRest">
+
+            <to uri="direct:home-page"/>
+
+        </get>
+
+        <post uri="processFile" id="processFileRest">
+         <to uri="direct:processFile" />
+        </post>
+    </rest>
+
+</rests>
