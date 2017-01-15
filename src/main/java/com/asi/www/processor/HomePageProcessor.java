@@ -12,7 +12,7 @@ public class HomePageProcessor implements Processor {
     @Override
     public void process(Exchange exchange) throws Exception {
         exchange.getOut().setBody("<html><h1>Hello World</h1>" +
-                "<form name=\"upload_form\" enctype=\"multipart/form-data\" method=\"post\" action=\"processFile\">" +
+                "<form name=\"upload_form\" enctype=\"multipart/form-data\" method=\"post\" action=\"/test\">" +
                 "<input type=\"file\" name=\"fname\">" +
                 "<input type=\"submit\" value=\"Upload\" />" +
                 "</form>" +

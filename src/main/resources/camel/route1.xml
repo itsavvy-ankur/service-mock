@@ -2,22 +2,47 @@
 <!-- Configures the Camel Context-->
 <routes xmlns="http://camel.apache.org/schema/spring">
 
-<route id="homePage">
-    <from uri="direct:home-page" />
-    <process ref="homePageProcessor" />
-
-</route>
-
-    <route id="processFile">
-        <from uri="direct:processFile" />
-        <convertBodyTo type="java.lang.String" />
-        <process ref="fileProcessor" />
+    <route id="homePage">
+        <from uri="direct:home-page"/>
+        <process ref="homePageProcessor"/>
 
     </route>
 
+    <route id="processFile">
+        <from uri="direct:processFile"/>
+        <convertBodyTo type="java.lang.String"/>
+        <process ref="fileProcessor"/>
+        <unmarshal>
+            <csv/>
+
+        </unmarshal>
+        <setHeader headerName="Content-Type">
+            <constant>text/html</constant>
+        </setHeader>
+        <log message="Unmarshalled body ${body}" />
+    </route>
+
     <route id="uploadFile">
-        <from uri="jetty://http://0.0.0.0:9886/test" />
-        <process ref="fileProcessor" />
+        <from uri="jetty://http://0.0.0.0:9886/test"/>
+        <process ref="fileProcessor"/>
+        <unmarshal>
+            <csv/>
+
+        </unmarshal>
+
+     <setHeader headerName="Content-Type">
+            <constant>application/json</constant>
+        </setHeader>
+        <log message="Unmarshalled body ${body}" />
+        <!--   <unmarshal ref="customFormat" />-->
+
+<!--
+        <to uri="mongodb:mongoBean?database=axs175&amp;collection=insurance&amp;operation=insert" />
+-->
+        <marshal>
+            <json prettyPrint="true" useList="true" library="Jackson" />
+        </marshal>
+
     </route>
 
 </routes>

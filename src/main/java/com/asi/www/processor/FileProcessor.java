@@ -15,7 +15,8 @@ public class FileProcessor implements Processor {
     public void process(Exchange exchange) throws Exception {
 
         System.out.println("Body : " + exchange.getIn().getBody(String.class));
-      //  Attachment attachment = exchange.getIn().getAttachmentObject("fname");
-      //  exchange.getOut().setBody(attachment.getDataHandler().getContent().toString());
+       Attachment attachment = exchange.getIn().getAttachmentObject("fname");
+      exchange.getIn().setBody(attachment.getDataHandler().getInputStream());
+       //  exchange.getOut().setBody(attachment.getDataHandler().getContent().toString());
     }
 }
