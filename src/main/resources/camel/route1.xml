@@ -36,12 +36,18 @@
         <log message="Unmarshalled body ${body}" />
         <!--   <unmarshal ref="customFormat" />-->
 
-<!--
+
+        <process ref="mongodbProcessor" />
         <to uri="mongodb:mongoBean?database=axs175&amp;collection=insurance&amp;operation=insert" />
--->
         <marshal>
             <json prettyPrint="true" useList="true" library="Jackson" />
         </marshal>
+
+        <!--
+                <marshal>
+                    <json prettyPrint="true" useList="true" library="Jackson" />
+                </marshal>
+        -->
 
     </route>
 
